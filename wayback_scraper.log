@@ -1,0 +1,41 @@
+2026-05-09 14:29:50,578  INFO  Создан файл: /Users/vladavlada/Desktop/crowdfunding_app/wayback_class0.csv
+2026-05-09 14:29:50,578  INFO  CDX: запрашиваем снапшоты за 2019...
+2026-05-09 14:30:20,867  WARNING  Попытка 1/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:30:52,108  WARNING  Попытка 2/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:31:24,118  WARNING  Попытка 3/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:31:28,123  WARNING  CDX не ответил для 2019
+2026-05-09 14:31:28,123  INFO  CDX: запрашиваем снапшоты за 2020...
+2026-05-09 14:31:58,384  WARNING  Попытка 1/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:32:20,941  WARNING  HTTP 503: http://web.archive.org/cdx/search/cdx
+2026-05-09 14:32:30,826  INFO    За 2020: 0 снапшотов.
+2026-05-09 14:32:30,826  INFO  CDX: запрашиваем снапшоты за 2021...
+2026-05-09 14:32:42,974  INFO    За 2021: 0 снапшотов.
+2026-05-09 14:32:42,975  INFO  CDX: запрашиваем снапшоты за 2022...
+2026-05-09 14:32:48,427  INFO    За 2022: 0 снапшотов.
+2026-05-09 14:32:48,427  INFO  CDX: запрашиваем снапшоты за 2023...
+2026-05-09 14:33:09,949  WARNING  HTTP 503: http://web.archive.org/cdx/search/cdx
+2026-05-09 14:33:16,704  WARNING  HTTP 503: http://web.archive.org/cdx/search/cdx
+2026-05-09 14:33:48,721  WARNING  Попытка 3/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:33:52,723  WARNING  CDX не ответил для 2023
+2026-05-09 14:33:52,724  INFO  CDX: запрашиваем снапшоты за 2024...
+2026-05-09 14:34:22,737  WARNING  Попытка 1/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:34:53,992  WARNING  Попытка 2/3: HTTPConnectionPool(host='web.archive.org', port=80): Read timed out. (read timeout=30)
+2026-05-09 14:35:01,505  WARNING  HTTP 503: http://web.archive.org/cdx/search/cdx
+2026-05-09 14:35:05,506  WARNING  CDX не ответил для 2024
+2026-05-09 14:35:05,673  INFO  ИТОГО неуспешных проектов: 0 → /Users/vladavlada/Desktop/crowdfunding_app/wayback_class0.csv
+2026-05-09 14:47:59,432  INFO  Возобновление: уже 0 проектов.
+2026-05-09 14:47:59,433  INFO  CDX: запрашиваем снапшоты за 2019 (постранично)...
+2026-05-09 14:48:17,200  INFO    За 2019: 0 уникальных URL проектов.
+2026-05-09 14:48:17,202  INFO  CDX: запрашиваем снапшоты за 2020 (постранично)...
+2026-05-09 14:48:35,395  INFO    За 2020: 0 уникальных URL проектов.
+2026-05-09 14:48:35,397  INFO  CDX: запрашиваем снапшоты за 2021 (постранично)...
+2026-05-09 14:48:45,080  INFO    За 2021: 0 уникальных URL проектов.
+2026-05-09 14:48:45,081  INFO  CDX: запрашиваем снапшоты за 2022 (постранично)...
+2026-05-09 14:49:25,865  INFO    За 2022: 0 уникальных URL проектов.
+2026-05-09 14:49:25,866  INFO  CDX: запрашиваем снапшоты за 2023 (постранично)...
+2026-05-09 14:49:48,701  INFO    За 2023: 0 уникальных URL проектов.
+2026-05-09 14:49:48,703  INFO  CDX: запрашиваем снапшоты за 2024 (постранично)...
+2026-05-09 14:49:54,499  WARNING  HTTP 503: https://web.archive.org/cdx/search/cdx
+2026-05-09 14:50:01,592  WARNING  HTTP 503: https://web.archive.org/cdx/search/cdx
+2026-05-09 14:50:19,934  INFO    За 2024: 0 уникальных URL проектов.
+2026-05-09 14:50:19,946  INFO  ИТОГО неуспешных проектов: 0 → /Users/vladavlada/Desktop/crowdfunding_app/wayback_class0.csv

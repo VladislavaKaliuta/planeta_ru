@@ -1,0 +1,51 @@
+============================================================
+ОТЧЁТ: Что нашли на страницах planeta.ru
+============================================================
+
+────────────────────────────────────────
+Страница: LISTING
+────────────────────────────────────────
+
+✗ Ни один селектор не сработал!
+
+⟶ Ссылок вида /campaigns/ НЕ найдено!
+
+⟶ КЛАССЫ с 'campaign/project/card' в имени:
+  a.nav-list_sublist-link
+  a.social-list_link
+  a.social-list_link__tg
+  a.social-list_link__vk
+  a.social-list_link__yt
+  h3.nav-list_title
+  li.nav-list_item
+  li.nav-list_sublist-item
+  li.page-header_quick-item
+  li.social-list_item
+  ul.nav-list
+  ul.nav-list_sublist
+  ul.page-header_quick-list
+  ul.social-list
+
+────────────────────────────────────────
+Страница: PROJECT
+────────────────────────────────────────
+
+✗ Ни один селектор не сработал!
+
+⟶ Ссылок вида /campaigns/ НЕ найдено!
+
+⟶ КЛАССЫ с 'campaign/project/card' в имени:
+  a.nav-list_sublist-link
+  a.social-list_link
+  a.social-list_link__tg
+  a.social-list_link__vk
+  a.social-list_link__yt
+  h3.nav-list_title
+  li.nav-list_item
+  li.nav-list_sublist-item
+  li.page-header_quick-item
+  li.social-list_item
+  ul.nav-list
+  ul.nav-list_sublist
+  ul.page-header_quick-list
+  ul.social-list

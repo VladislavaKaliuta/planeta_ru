@@ -1,0 +1,34 @@
+# Парсинг и браузерная автоматизация
+selenium>=4.18.0
+webdriver-manager>=4.0.1
+
+# Парсинг HTML
+beautifulsoup4>=4.12.0
+lxml>=5.1.0
+
+# Обработка данных
+pandas>=2.1.0
+numpy>=1.26.0
+scipy>=1.12.0
+
+# HTTP-запросы (альтернатива Selenium для сайтов без защиты)
+requests>=2.31.0
+httpx>=0.27.0
+wayback>=0.4.5            # обёртка над Wayback Machine с ретраями и rate limit
+
+# NLP и текстовый анализ
+pymorphy3>=2.0.0          # морфологический анализ русского языка
+pyspellchecker>=0.8.1     # проверка орфографии
+
+# ML модели (для feature_engineering и моделирования)
+scikit-learn>=1.4.0
+xgboost>=2.0.3
+catboost>=1.2.3
+shap>=0.45.0              # объяснимость моделей
+
+# Опционально: визуализация
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Установка:
+#   pip install -r requirements.txt
