@@ -65,7 +65,7 @@ CATEGORIES = [""]   # пустая строка = параметр category не
 # MODE = "class0"  → STATUS="",        собирает завершённые с pct<50 (класс 0)
 # ═══════════════════════════════════════════════════════════════════════════
 MAX_PROJECTS    = 96      # сколько новых проектов собрать за запуск (0 = без лимита)
-MAX_PAGES       = 50      # лимит прокруток infinite scroll
+MAX_PAGES       = 25      # лимит прокруток infinite scroll
 STATUS          = "success"
 OUTPUT_FILE     = "planeta_class1.csv"
 DELAY_MIN       = 2.0
@@ -582,10 +582,10 @@ def run():
 
                 # ── Фильтры по режиму ────────────────────────────────────
                 # Фильтр: только успешные завершённые (pct >= 50)
-                if pct < 50:
-                    log.info("  SKIP (pct=%.0f%% < 50): '%s'", pct, project.title)
-                    seen_urls.add(url)
-                    continue
+                # if pct < 50:
+                #     log.info("  SKIP (pct=%.0f%% < 50): '%s'", pct, project.title)
+                #     seen_urls.add(url)
+                #     continue
 
                 # ── Сохраняем ────────────────────────────────────────────
                 import dataclasses
