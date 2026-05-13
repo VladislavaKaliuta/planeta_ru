@@ -508,6 +508,8 @@ def parse_project(driver: webdriver.Chrome, url: str, category: str) -> Optional
             p.updates_count = count
         elif "/comments" in href:
             p.comments_count = count
+        elif "/backers" in href:
+            p.backers_count = count
 
     # Удаляем рекламный блок "Поддержите новый проект автора" перед подсчётом
     excluded = soup.find("section", class_=re.compile(
@@ -516,19 +518,18 @@ def parse_project(driver: webdriver.Chrome, url: str, category: str) -> Optional
     if excluded:
         excluded.decompose()
 
-    # Видео 1: шапка проекта (figure с кнопкой play)
-    nmb_video = 0
-    header_figure = soup.find("figure", class_=re.compile(r"campaign-info-module__media"))
-    if header_figure and header_figure.find("button"):
-        nmb_video += 1
-
-    # Видео в описании: ищем по всему <main>, т.к. iframe может быть вне desc_block
     main_el = soup.find("main") or soup
-    VIDEO_HOSTS = ("tv.planeta.ru", "youtube.com", "youtu.be", "vimeo.com", "rutube.ru")
+
+    # Видео: кнопки play (aria-label="Воспроизвести видео") — охватывают и шапку,
+    # и встроенные видео из tv.planeta.ru, которые рендерятся как превью+кнопка
+    play_btns = main_el.find_all(
+        "button", attrs={"aria-label": re.compile(r"Воспроизвести", re.I)}
+    )
+    nmb_video = len(play_btns)
+    # Плюс iframes внешних видеохостингов (YouTube, Vimeo, Rutube)
+    EXTERNAL_VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "rutube.ru")
     for iframe in main_el.find_all("iframe", src=True):
-        src = iframe.get("src", "")
-        cls = " ".join(iframe.get("class", []))
-        if "styles-module__video" in cls or any(h in src for h in VIDEO_HOSTS):
+        if any(h in iframe.get("src", "") for h in EXTERNAL_VIDEO_HOSTS):
             nmb_video += 1
     nmb_video += len(main_el.find_all("video"))
     nmb_video += len(main_el.find_all(attrs={"data-video": True}))
