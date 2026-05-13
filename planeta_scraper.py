@@ -509,21 +509,38 @@ def parse_project(driver: webdriver.Chrome, url: str, category: str) -> Optional
         elif "/comments" in href:
             p.comments_count = count
 
+    # Удаляем рекламный блок "Поддержите новый проект автора" перед подсчётом
+    excluded = soup.find("section", class_=re.compile(
+        r"author-new-active-project-module__section"
+    ))
+    if excluded:
+        excluded.decompose()
+
+    # Видео 1: шапка проекта (figure с кнопкой play)
+    nmb_video = 0
+    header_figure = soup.find("figure", class_=re.compile(r"campaign-info-module__media"))
+    if header_figure and header_figure.find("button"):
+        nmb_video += 1
+
     desc_block = soup.find("div", class_=re.compile(
         r"common-wrapper-module__wrapper|campaign-info-module__text"
     ))
     if desc_block:
-        iframes = desc_block.find_all("iframe", src=re.compile(r"youtube|vimeo|rutube", re.I))
+        # Видео в описании: iframe любого хостинга + <video> + data-video
+        iframes = desc_block.find_all("iframe", src=True)
         video_tags = desc_block.find_all("video")
         video_divs = desc_block.find_all(attrs={"data-video": True})
-        p.nmb_video = len(iframes) + len(video_tags) + len(video_divs)
+        nmb_video += len(iframes) + len(video_tags) + len(video_divs)
+        # Фото: только контентные изображения (class содержит common-styles-module__image)
         imgs = [img for img in desc_block.find_all("img")
-                if "fluentui-emoji" not in img.get("src", "")]
+                if "common-styles-module__image___WdLHf" in " ".join(img.get("class", []))]
         p.nmb_image = len(imgs)
         raw_text = desc_block.get_text(" ", strip=True)
         p.nmb_word     = _words(raw_text)
         p.nmb_sentence = _sentences(raw_text)
         p.full_text    = clean_text(raw_text) if raw_text else None
+
+    p.nmb_video = nmb_video
 
     return p
 
