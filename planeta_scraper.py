@@ -522,15 +522,21 @@ def parse_project(driver: webdriver.Chrome, url: str, category: str) -> Optional
     if header_figure and header_figure.find("button"):
         nmb_video += 1
 
+    # Видео в описании: ищем по всему <main>, т.к. iframe может быть вне desc_block
+    main_el = soup.find("main") or soup
+    VIDEO_HOSTS = ("tv.planeta.ru", "youtube.com", "youtu.be", "vimeo.com", "rutube.ru")
+    for iframe in main_el.find_all("iframe", src=True):
+        src = iframe.get("src", "")
+        cls = " ".join(iframe.get("class", []))
+        if "styles-module__video" in cls or any(h in src for h in VIDEO_HOSTS):
+            nmb_video += 1
+    nmb_video += len(main_el.find_all("video"))
+    nmb_video += len(main_el.find_all(attrs={"data-video": True}))
+
     desc_block = soup.find("div", class_=re.compile(
         r"common-wrapper-module__wrapper|campaign-info-module__text"
     ))
     if desc_block:
-        # Видео в описании: iframe любого хостинга + <video> + data-video
-        iframes = desc_block.find_all("iframe", src=True)
-        video_tags = desc_block.find_all("video")
-        video_divs = desc_block.find_all(attrs={"data-video": True})
-        nmb_video += len(iframes) + len(video_tags) + len(video_divs)
         # Фото: только контентные изображения (class содержит common-styles-module__image)
         imgs = [img for img in desc_block.find_all("img")
                 if "common-styles-module__image___WdLHf" in " ".join(img.get("class", []))]
