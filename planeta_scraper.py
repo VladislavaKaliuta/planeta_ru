@@ -85,7 +85,8 @@ class Project:
     goal_sum:        Optional[float] = None
     collected_sum:   Optional[float] = None
     collected_pct:   Optional[float] = None
-    backers_count:   Optional[int]   = None
+    backers_count:   Optional[int]   = None  # уникальных участников (вкладка /backers)
+    support_count:   Optional[int]   = None  # сколько раз поддержали (транзакций)
     nmb_video:       Optional[int]   = None
     nmb_image:       Optional[int]   = None
     nmb_reward:      Optional[int]   = None
@@ -459,7 +460,7 @@ def parse_project(driver: webdriver.Chrome, url: str, category: str) -> Optional
             continue
         val = dd_el.get_text(strip=True)
         if "поддержали" in label:
-            p.backers_count = _int(val)
+            p.support_count = _int(val)  # количество транзакций, не уникальных людей
         elif "запущен" in label:
             p.date_start = val
         elif any(w in label for w in ("завершён","завершился","действовал до","окончание")):
