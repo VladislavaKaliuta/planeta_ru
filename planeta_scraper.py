@@ -64,8 +64,8 @@ CATEGORIES = [""]   # пустая строка = параметр category не
 # MODE = "class1"  → STATUS="success", собирает успешные проекты (класс 1)
 # MODE = "class0"  → STATUS="",        собирает завершённые с pct<50 (класс 0)
 # ═══════════════════════════════════════════════════════════════════════════
-MAX_PROJECTS    = 96      # сколько новых проектов собрать за запуск (0 = без лимита)
-MAX_PAGES       = 25      # лимит прокруток infinite scroll
+MAX_PROJECTS    = 200      # сколько новых проектов собрать за запуск (0 = без лимита)
+MAX_PAGES       = 8      # лимит прокруток infinite scroll
 STATUS          = "success"
 OUTPUT_FILE     = "planeta_class1.csv"
 DELAY_MIN       = 2.0
@@ -263,13 +263,31 @@ def collect_listing_urls(driver: webdriver.Chrome, category: str) -> list[str]:
 
     def find_btn():
 
-        try:
-            return driver.find_element(
-                By.XPATH,
-                "//button[contains(., 'Ещё проекты')]"
-            )
-        except:
-            return None
+        selectors = [
+
+            # новый текст
+            "//button[contains(., 'Показать ещё')]",
+
+            # старый текст (fallback)
+            "//button[contains(., 'Ещё проекты')]",
+
+            # по class
+            "//button[contains(@class, 'btnMore')]",
+
+        ]
+
+        for xpath in selectors:
+
+            try:
+                btn = driver.find_element(By.XPATH, xpath)
+
+                if btn:
+                    return btn
+
+            except Exception:
+                continue
+
+        return None
 
     # Ждём появления первых карточек и кнопки (страница грузится через React)
     log.info("  Ждём загрузки первых карточек...")
@@ -293,9 +311,21 @@ def collect_listing_urls(driver: webdriver.Chrome, category: str) -> list[str]:
     while click_count < MAX_PAGES:
         log.info("=== НОВЫЙ ЦИКЛ ===")
         log.info("Скроллим вниз...")
-        driver.execute_script("""
-            window.scrollBy(0, 2500);
-        """)
+        # Скроллим к последней карточке проекта
+        cards = driver.find_elements(
+            By.CSS_SELECTOR,
+            "a[href*='/campaigns/']"
+        )
+
+        if cards:
+            driver.execute_script("""
+                arguments[0].scrollIntoView({
+                    behavior: 'instant',
+                    block: 'center'
+                });
+            """, cards[-1])
+
+            time.sleep(1.5)
 
         time.sleep(3)
 
